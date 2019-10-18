@@ -5,49 +5,36 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Aula 03 - VUeJS do Jeito NInja</title>
+
+	<style media="screen">
+		.red {
+			color: red
+		}
+
+		.green {
+			color: green
+		}
+	</style>
 </head>
 <body>
 	<div id="app">
 		<h1>{{ titulo }}</h1>
-
-		<label for="">Nome</label><br>
-		<input type="text" v-model="nome">
+		<!-- <img :src="imagem" v-bind:alt="alt"> -->
+		<!-- em vez de v-bind por ser : apenas -->
+		<!-- <img :src="imagem" :alt="alt"> -->
+		<!-- para chamar direto usa "''"  -->
+		<img 
+		:src="'https://cdn2.hubspot.net/hubfs/3489321/vuejs.jpeg'" 
+		:alt="'Vue is Awesome!'" title="" id="" 	
+		:data-img-large="'https://cdn2.hubspot.net/hubfs/3489321/vuejs.jpeg'"> 
 		
-		<br><br>
-		<label for="">Telefone</label><br>
-		<input type="text" v-model="telefone">
-
-		<br><br>
-		<label for="">Deseja receber nossas novidades</label><br>
-		<input type="radio" value="Sim" v-model="novidades"> Sim
-		<input type="radio" alue="Não" v-model="novidades"> Não	
+		<!-- <p class="red"> -->
+		<p :class="classHtml">			
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse ad harum deserunt aliquid hic facilis, 
+				autem in tempore! Obcaecati numquam itaque vero et vitae provident culpa voluptatibus officiis eum tempore?		
+			
+		</p>		
 		
-		<br><br>
-		<label for="">Interesses</label><br>
-		<input type="checkbox" value="Futebol" v-model="interesses"> Futebol <br>
-		<input type="checkbox" value="Formula" v-model="interesses"> Formula 1 <br>
-		<input type="checkbox" value="Corrida" v-model="interesses"> Corrida <br>
-
-		<br><br>
-		<label for="">Como nos conheceu</label><br>
-		<select v-model="conheceu">
-			<option value="">Escolha</option>
-			<option value="Google">Google</option>
-			<option value="TV">TV</option>
-			<option value="Revista">Revista</option>
-		</select>
-
-		<br><br>
-
-		<button>Enviar</button>
-
-		<hr>
-
-		Nome: {{ nome }} <br>
-		Telefone: {{ telefone }} <br>
-		Novidades: {{ novidades }} <br>
-		Interesses: {{ interesses }} <br>
-		Como nos conheceu? {{ conheceu }} <br>
 		
 	</div>
 	
@@ -58,12 +45,9 @@
 			el: "#app",
 			data: {
 				titulo: "Vuejs do Jeito Ninja!",
-				nome: "",
-				telefone : "",
-				novidades: "",
-				interesses: [],		
-				conheceu: "",
-				
+				// imagem: "https://cdn2.hubspot.net/hubfs/3489321/vuejs.jpeg",
+				// alt: "Vue is Awesome!",
+				classHtml: "green"
 			}
 		});
 	</script>
