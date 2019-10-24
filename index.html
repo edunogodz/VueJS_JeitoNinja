@@ -4,38 +4,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Aula 03 - VUeJS do Jeito NInja</title>
+	<title>Aula 07 - VUeJS do Jeito NInja</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-	<style media="screen">
-		.red {
-			color: red
-		}
-
-		.green {
-			color: green
-		}
-	</style>
-</head>
+	</head>
 <body>
 	<div id="app">
-		<h1>{{ titulo }}</h1>
-		<!-- <img :src="imagem" v-bind:alt="alt"> -->
-		<!-- em vez de v-bind por ser : apenas -->
-		<!-- <img :src="imagem" :alt="alt"> -->
-		<!-- para chamar direto usa "''"  -->
-		<img 
-		:src="'https://cdn2.hubspot.net/hubfs/3489321/vuejs.jpeg'" 
-		:alt="'Vue is Awesome!'" title="" id="" 	
-		:data-img-large="'https://cdn2.hubspot.net/hubfs/3489321/vuejs.jpeg'"> 
-		
-		<!-- <p class="red"> -->
-		<p :class="classHtml">			
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse ad harum deserunt aliquid hic facilis, 
-				autem in tempore! Obcaecati numquam itaque vero et vitae provident culpa voluptatibus officiis eum tempore?		
-			
-		</p>		
-		
-		
+		<h1>{{ titulo }}</h1>	
+		<button class="btn" :class="btnClassLimpar" v-bind:style="btnStyleLimpar">LIMPAR</button>	
+		<button class="btn" v-bind:class="btnClassEnviar" :style="btnStyleEnviar">ENVIAR</button>
 	</div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -45,9 +22,21 @@
 			el: "#app",
 			data: {
 				titulo: "Vuejs do Jeito Ninja!",
-				// imagem: "https://cdn2.hubspot.net/hubfs/3489321/vuejs.jpeg",
-				// alt: "Vue is Awesome!",
-				classHtml: "green"
+				btnClassLimpar: {
+					'btn-danger':true,
+					'btn-sm': true
+				},
+				btnClassEnviar: [
+					'btn-primary',
+					{'btn-lg':false}
+				],
+				btnStyleLimpar: [
+					{'font-size':'50px'},
+					{'text-transform':'lowercase'}
+			],
+				btnStyleEnviar: {
+					'font-size':'10px'
+				}
 			}
 		});
 	</script>
