@@ -5,38 +5,33 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Aula 07 - VUeJS do Jeito NInja</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
 
 	</head>
 <body>
-	<div id="app">
-		<h1>{{ titulo }}</h1>	
-		<button class="btn" :class="btnClassLimpar" v-bind:style="btnStyleLimpar">LIMPAR</button>	
-		<button class="btn" v-bind:class="btnClassEnviar" :style="btnStyleEnviar">ENVIAR</button>
+	<div id="app">		
+		<h1>{{ titulo }}</h1>
+		<form action="https://www.google.com">
+			<button class="btn btn-primary" @click.prevent.stop="enviar()" type="submit">Enviar</button>	
+		</form>
+		
 	</div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
 
 	<script>
 		var app = new Vue({
 			el: "#app",
 			data: {
-				titulo: "Vuejs do Jeito Ninja!",
-				btnClassLimpar: {
-					'btn-danger':true,
-					'btn-sm': true
+				titulo: "Vuejs do Jeito Ninja!",				
+			},
+
+			methods: {
+				enviar(){
+					alert('Enviado!');
 				},
-				btnClassEnviar: [
-					'btn-primary',
-					{'btn-lg':false}
-				],
-				btnStyleLimpar: [
-					{'font-size':'50px'},
-					{'text-transform':'lowercase'}
-			],
-				btnStyleEnviar: {
-					'font-size':'10px'
-				}
 			}
 		});
 	</script>
