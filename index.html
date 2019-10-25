@@ -12,15 +12,7 @@
 <body>
 	<div id="app">		
 		<h1>{{ titulo }}</h1>
-		<div> {{ date |dateFormat }} </div>
-		<ul>
-			<li v-for="usuario in usuarios">{{ usuario.nome | toUpperCase() }}</li>
-			<br/>
-			<li v-for="usuario in usuarios">{{ usuario.nome | truncate('10') }}</li>
-		</ul>
-		<form action="https://www.google.com">
-			<button class="btn btn-primary" @click.prevent.stop="enviar()" type="submit">Enviar</button>	
-		</form>
+		{{ fullName }}
 		
 	</div>
 	
@@ -32,38 +24,36 @@
 			el: "#app",
 			data: {
 				titulo: "Vuejs do Jeito Ninja!",
-				date: '2019-10-23',
-				usuarios:[
-					{ nome: 'Jon Snow' },
-					{ nome: "Tyrion Lannister" },
-					{ nome: "Daenerys Targaryan" }
-				]				
+				firstName: "",
+				lastName: "",
+				// fullName: ""				
 			},
 
-			filters: {
-				toUpperCase(str) {
-					return str.toUpperCase();
-				},
+			computed: {
+				fullName(){
+					return this.firstName + ' ' + this.lastName;
+				}
+				
+			},
 
-				truncate(str, length) {
-					var output =  str;
-					if (output.length > length) {
-						output = str.substring(0, length) + ' ...' ;
-					}
-					return output;
+			watch: {
+				/* firstName(newValue) {
+					this.fullName = newValue  + ' ' + this.lastName;
 				},
-
-				dateFormat(date) {
-					const output = date.split('-');
-				return output[2] + '/' + output[1] + '/' + output[0];
+				lastName(newValue) {
+					this.fullName = this.firstName  + ' ' + newValue;
+				}, */
+				firstName(newValue) {
+					this.updateUser();
 				},
 			},
 
 			methods: {
-				enviar(){
-					alert('Enviado!');
-				},
+				updateUser(){
+					console.log('Usuario atualizado!');
+				}
 			}
+			
 		});
 	</script>
 </body>
