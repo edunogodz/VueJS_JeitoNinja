@@ -11,51 +11,77 @@
 	</head>
 <body>
 	<div id="app">
-		<navbar></navbar>
+		<br><br><br><br><br><br>
+		<nav-bar></nav-bar>
 		<br><br>
-		<menu-bar></menu-bar>
+		<menu-bar :items="[{ label: 'A Empresa'},{ label: 'Serviços'}]"></menu-bar>
 	</div>
 
 	<template id="nav">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand" href="#">Navbar</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>				
+		<nav class="navbar navbar-expand-lg navbar-light bg-faded">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand" href="#">Navbar</a>
+								
 				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-					<menu-bar></menu-bar>
+					<menu-bar :items="topNav"
+						@emit-click="getLink"
+					></menu-bar>
 					
 					<form class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search" placeholder="Search">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
-					</div>
+				</div>
 		</nav>
 	</template>
 
-	<template id="menu">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Link</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-			</li>
-		</ul>
+	<template id="menu">		
+			<ul class="navbar-nav mr-auto">
+				<li v-for="(item, index) in items" 
+					class="nav-item">
+					<a v-on:click.stop.prevent="emitClick(index)" 
+					class="nav-link" href="#">{{ item.label }}</a>
+				</li>			
+			</ul>		
 	</template>
 	
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 	<script>
-		Vue.component('navbar', { 
-			template: "#nav"
+		Vue.component('nav-bar', { 
+			template: "#nav",
+			data() {
+				return {
+					topNav: [{ label: 'Home'},{ label: 'Link' } ,{ label: 'Disabled' }]
+				}
+			},
+			methods:{
+				getLink(index){
+					alert(this.topNav[index].label);
+				}
+			}
 		});
 
 		Vue.component('menu-bar', { 
-			template: "#menu"
+			template: "#menu",
+			// props: ['items'],
+			props: {
+				items: {
+					// type: String | Array | Object | Boolean,
+					type: Array,
+					// type: ['String','Array','Object','Boolean']
+					// type: String,
+					required: true,
+					// default: 'Vuejs'
+				}
+			},
+			methods: {
+				emitClick(index) {
+					this.$emit('emit-click', index);
+				}
+			}
 
 		});
 
@@ -67,5 +93,6 @@
 			}			
 		});
 	</script>
+
 </body>
 </html>
