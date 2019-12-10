@@ -11,87 +11,57 @@
 	</head>
 <body>
 	<div id="app">
-		<br><br><br><br><br>
+		<br><br><br>
 		
 		<div class="container">
-			<input-form></input-form>
-			
+			<card>
+				<h4 slot="title" class="card-title">Card title</h4>
+
+				<template slot="text">			
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content	</p>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content	</p>
+				</template>
+				<a slot="action"  href="#" class="btn btn-primary">Go somewhere</a>
+			</card>
+
 			<br>
 
-			<my-list></my-list>
-		</div>
-
-		<br>
-
-		
+			<card>
+				<h4 slot="title" class="card-title">Card title 2</h4>
+				<template slot="text">
+					<p class="card-text">Lorem ipsum dolor sit amet	</p>
+					<p class="card-text">Lorem ipsum dolor sit amet	</p>
+				</template>
+				<a slot="action" href="#" class="btn btn-primary">Leia mais</a>
+			</card>
+		</div>		
 	</div>
 	
-	<template id="form">
+	<template id="card">
 		<div class="card">
+			<img class="card-img-top" src="http://via.placeholder.com/350x150" class="img-responsive">
 			<div class="card-block">
-				<div class="form-group">
-					<label for="">Titulo</label>
-					<input 	v-model="title" 
-							type="text" class="form-control">
-				</div>
-				<button @click.stop.prevent="submit()" 
-						class="btn btn-primary">ENVIAR</button>								
-			</div>
+				<!-- <slot></slot> -->
+				<slot name="title"></slot>
+				<slot name="text"></slot>
+				<slot name="action"></slot>
+			
+			</div>			
 		</div>
 	</template>
 
-	<template id="list">
-		<ul class="list-group">
-			<li v-for="item in list"
-				class="list-group-item">{{ item.title }}</li>
-			
-		</ul>
-	</template>
-	</template>
-	
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 	<script>
 		
-		Vue.component('input-form',{
-			template: '#form',
+		Vue.component('card',{
+			template: '#card',
 			data(){
 				return{
 					title:'',
 				}
-			},
-			methods: {
-				submit(){
-					//eventBus.$emit('submit',this.title);
-					this.$eventHub.$emit('submit',this.title);
-					//console.log('here');
-				}
-			}
+			},		
 		});
-
-		Vue.component('my-list',{
-			template: '#list',
-			created(){
-				var vm=this;
-				//eventBus.$on('submit',function(title){
-				this.$eventHub.$on('submit',function(title){
-					if(title) {
-						vm.list.push({ title: title });
-					}
-				});
-			},
-
-			data() {
-				return {
-					list: [
-						{ title: "Ir a feira" },
-					]
-				}
-			},
-		});		
-
-		//var eventBus = new Vue();
-		Vue.prototype.$eventHub = new Vue();
 
 		var app = new Vue({
 			el: "#app",
@@ -100,6 +70,7 @@
 				titulo: "Vuejs do Jeito Ninja!"						
 			}			
 		});
+
 	</script>
 
 </body>
